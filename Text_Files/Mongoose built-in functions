@@ -1,0 +1,98 @@
+\*\*Mongoose provides a variety of built-in functions that are essential for working with MongoDB. Here’s a list of some of the most important Mongoose functions and methods:
+
+### 1. **Model Functions**
+
+- **`.create()`**: Creates and saves one or more documents in the database.
+- **`.find()`**: Retrieves documents that match a query. It can return multiple documents.
+- **`.findOne()`**: Retrieves a single document that matches a query.
+- **`.findById()`**: Retrieves a document by its unique ID.
+- **`.findByIdAndUpdate()`**: Finds a document by its ID and updates it.
+- **`.findByIdAndDelete()`**: Finds a document by its ID and deletes it.
+- **`.updateOne()`**: Updates a single document that matches a query.
+- **`.updateMany()`**: Updates multiple documents that match a query.
+- **`.deleteOne()`**: Deletes a single document that matches a query.
+- **`.deleteMany()`**: Deletes multiple documents that match a query.
+
+### 2. **Query Helpers**
+
+- **`.limit()`**: Limits the number of documents returned in the query.
+- **`.skip()`**: Skips a specified number of documents in the query result.
+- **`.sort()`**: Sorts the documents returned by the query.
+- **`.select()`**: Specifies which fields to include or exclude from the returned documents.
+- **`.exec()`**: Executes the query and returns a promise (used with query chains).
+
+### 3. **Document Methods**
+
+- **`.save()`**: Saves a document to the database (can be used on an instance of a model).
+- **`.remove()`**: Removes a document from the database (can be used on an instance of a model).
+- **`.populate()`**: Replaces specified paths in the document with documents from other collections (used for referencing).
+
+### 4. **Static Methods**
+
+- **`schema.statics.methodName`**: Define static methods for your models (e.g., `Product.findByCategory()`).
+
+### 5. **Instance Methods**
+
+- **`schema.methods.methodName`**: Define instance methods for your documents (e.g., `product.calculatePrice()`).
+
+### 6. **Middleware (Hooks)**
+
+- **Pre and Post Hooks**: Define middleware to run before or after certain actions (e.g., `pre('save')`, `post('find')`).
+
+### 7. **Validation**
+
+- **`.validate()`**: Validates a document instance based on the schema's validation rules.
+- **Schema validation options**: Options to set for validation (e.g., `required`, `minlength`, `maxlength`, `enum`).
+
+### 8. **Connection Methods**
+
+- **`mongoose.connect()`**: Establishes a connection to the MongoDB database.
+- **`mongoose.disconnect()`**: Disconnects from the MongoDB database.
+
+### 9. **Aggregation**
+
+- **`.aggregate()`**: Performs aggregation operations using MongoDB's aggregation framework.
+
+### 10. **Indexes**
+
+- **`.createIndex()`**: Creates an index on a specified field or fields to optimize query performance.
+
+### Example Usage:
+
+Here’s a simple example of some of these functions in action:
+
+```javascript
+import mongoose from "mongoose";
+
+// Define a schema
+const productSchema = new mongoose.Schema({
+  name: String,
+  price: Number,
+  category: String,
+});
+
+// Create a model
+const Product = mongoose.model("Product", productSchema);
+
+// Create a new product
+async function createProduct() {
+  const product = await Product.create({
+    name: "Example Product",
+    price: 10.99,
+    category: "Example",
+  });
+  console.log(product);
+}
+
+// Find all products
+async function findProducts() {
+  const products = await Product.find({});
+  console.log(products);
+}
+
+// Example usage
+createProduct();
+findProducts();
+```
+
+These functions and methods provide a powerful and flexible way to interact with MongoDB through Mongoose, making it easier to define schemas, create models, and perform CRUD operations.\*\*
